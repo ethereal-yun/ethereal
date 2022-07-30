@@ -1,26 +1,14 @@
 import { request } from '@umijs/max';
 
-export function queryUserList({ current = 1, pageSize = 5 }) {
-    return request(`/api/users?current=${current}&pageSize=${pageSize}`)
+//首页home数据
+export function queryHome() {
+    return request("/api/v2/pweb/home")
 }
-
-export function queryUserById(id: number) {
-    return request(`/api/users/${id}`);
+//首页home编辑推荐
+export function queryHomeRectopics(){
+    return request("/api/v2/pweb/ugc/rec_topics")
 }
-
-export function deleteUserById(id: number, { current = 1, pageSize = 5 }) {
-    // return request(`/api/users/delete/${id}?current=${current}&pageSize=${pageSize}`);
-    return request(`/api/users/delete/${id}`, {
-        params: { current: current, pageSize: pageSize },
-    })
-}
-
-export function createUser(user: any) {
-    return request(`/api/users/create`, {
-        method: "POST",
-        data: user,
-        headers: {
-            'Content-Type': 'application/json;charset=utf-8'
-        }
-    });
+//首页home最新上架
+export function queryHomeTopics(){
+    return request("/api/v2/pweb/ugc/topics")
 }

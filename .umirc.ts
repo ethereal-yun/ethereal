@@ -29,6 +29,8 @@ export default defineConfig({
     { path: "/sort", component: "sort", title: "分类" },
     { path: "/chapter", component: "chapter", title: "章节" },
     { path: "/content", component: "content", title: "章节内容" },
+    { path: "/me", component: "me", title: "我的" },
+    { path: "/book", component: "book", title: "书架" },
   ],
   npmClient: 'pnpm',
 });
