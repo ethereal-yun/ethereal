@@ -35,8 +35,8 @@ export default function Page() {
   }, [emitrun])
 
   //跳转到详情页
-  const todetail = (e) => {
-    navigate(`/detail?id=${e}`)
+  const todetail = (e,title) => {
+    navigate(`/detail?id=${e}&title=${title}`)
   }
 
   return (
@@ -57,7 +57,7 @@ export default function Page() {
         <ul>
           {exadata && exadata.rank_info.topics.map(item => {
             return <li className={styles.everycartoon} key={item.id} >
-              <div onClick={(e) => todetail(item.id)}>
+              <div onClick={(e) => todetail(item.id,item.title)}>
                 <Card title={item.title} >
                   <div className={styles.textandimg}>
                     <Image src={item.cover_image_url} width={100} height={100} fit='fill' />

@@ -39,9 +39,9 @@ export default function Page() {
     setactive([first, second, third])
     console.log([first, second, third]);
   }, [first, second, third])
-  const todetaill= (e)=>{
+  const todetaill= (e,title)=>{
     console.log(e);
-    navigate(`/detail?id=${e}`)
+    navigate(`/detail?id=${e}&title=${title}`)
   }
   return (
     <div className={styles.bigbox}>
@@ -69,7 +69,7 @@ export default function Page() {
         <ul className={styles.detailsortlist}>
         
             {detdata && detdata.topics.map((item) => {
-              return <li key={item.id} className={styles.innersort} onClick={(e)=>todetaill(item.id)}>
+              return <li key={item.id} className={styles.innersort} onClick={(e)=>todetaill(item.id,item.title)}>
                 <Image src={item.vertical_image_url} width={100} height={120} fit='fill' />
                 {item.title} <br></br>{item.sub_title}
              </li>
