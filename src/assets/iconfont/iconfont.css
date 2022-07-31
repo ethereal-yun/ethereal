@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 3461115 */
-  src: url('iconfont.woff2?t=1659160304578') format('woff2'),
-       url('iconfont.woff?t=1659160304578') format('woff'),
-       url('iconfont.ttf?t=1659160304578') format('truetype');
+  src: url('iconfont.woff2?t=1659256255547') format('woff2'),
+       url('iconfont.woff?t=1659256255547') format('woff'),
+       url('iconfont.ttf?t=1659256255547') format('truetype');
 }
 
 .iconfont {
@@ -13,51 +13,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-diqiu:before {
+  content: "\e67d";
+}
+
 .icon-dianzan:before {
   content: "\ec7f";
-}
-
-.icon-xialajiantouxiao:before {
-  content: "\e87e";
-}
-
-.icon-sousuo:before {
-  content: "\e601";
-}
-
-.icon-shoucang:before {
-  content: "\e617";
-}
-
-.icon-ziwopingjia:before {
-  content: "\e626";
-}
-
-.icon-pinpai:before {
-  content: "\e600";
-}
-
-.icon-danpin:before {
-  content: "\e7ab";
-}
-
-.icon-danpin1:before {
-  content: "\e65b";
-}
-
-.icon-dingdan:before {
-  content: "\e897";
-}
-
-.icon-chanpinguanli:before {
-  content: "\e722";
-}
-
-.icon-shouye:before {
-  content: "\e614";
-}
-
-.icon-shouye1:before {
-  content: "\e60d";
 }
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { useRequest, useNavigate } from '@umijs/max';
-import { queryHome, queryHomeRectopics, queryHomeTopics } from "@/services/user";
-import { Swiper } from 'antd-mobile';
-import '@/assets/iconfont/iconfont.css'
+import { queryHome, queryHomeRectopics, queryHomeTopics,queryContent} from "@/services/user";
+import { Swiper, Grid,Image} from 'antd-mobile';
+import '@/assets/iconfont/iconfont.css';
 
 export default function Page() {
   const { data, loading } = useRequest(() => queryHome(), { cacheKey: 'HomeBanners' })
@@ -12,15 +12,25 @@ export default function Page() {
   const navigate = useNavigate();
   const [list, setList] = useState([]) as any;
   const [flag, setFlag] = useState(true) as any;
+  const [id,setId] = useState("1");
+  const { data: cdata, loading: cloading,run} = useRequest(() => queryContent(id), { refreshDeps:[id]})
+  const gochapter=(id:string)=>{
+    setId(id);
+    if(cdata.code==200){
+      navigate(`/content/${id}?title=${cdata.comic_info.title}`)
+    }
+  }
   useEffect(() => {
-    flag ? (recdata && setList([...recdata.topics])) : (topcdata && setList([...topcdata.list]))
-  }, [flag, loading])
+    flag ? (recdata && setList([...recdata.topics])) : (topcdata && setList([...topcdata.list]));
+    run();
+  }, [flag, loading,id])
+  
   return (
     <div className={styles.home}>
       {/*轮播图 */}
       {data && <Swiper loop={true} autoplay={true}>{data.banners.map((item: any, index: number) => (
         <Swiper.Item key={index}>
-          <div className={styles.content} onClick={() => { navigate(`/content?id=${item.target_id}`) }}  >
+          <div className={styles.content} onClick={()=>gochapter(item.target_id)}  >
             <img className={styles.img} src={item.image_url} />
           </div>
         </Swiper.Item>
@@ -44,7 +54,7 @@ export default function Page() {
           </div>
           <div className={styles.rec_topics}>
             {
-              list && list.map((item: any, index: number) => {
+              list && list.map((item: any) => {
                 return (<div className={styles.topics} key={item.id}>
                   <div className={styles.yclist} onClick={() => { navigate(`/chapter?id=${item.id}&title=${item.title}`) }}>
                     <div>
@@ -62,27 +72,25 @@ export default function Page() {
       }
       {/* 这漫画令我上头 */}
       <div className={styles.discovery}>
-        {data && data.discovery_modules.map((item1: any, index: number) => {
-          return <div className={styles.modules}>
+        {data && data.discovery_modules.map((item1: any) => {
+          return <div className={styles.modules} key={item1.title}>
             <h2 className={styles.h2}>{item1.title}</h2>
-            <div>
-              {item1.topics && item1.topics.map((item2: any, index: number) => {
-                return <div className={styles.verti} onClick={() => { navigate(`/chapter?id=${item2.id}&title=${item2.title}`) }}>
-                  <div className={styles.tagimg}>
-                    <img src={item2.vertical_image_url} />
-                    <div className={styles.tagsitem2}>{item2.tags}</div>
-                  </div>
-                  <p className={styles.usernickname}>{item2.user.nickname}</p>
-                  <p><i className='iconfont icon-dianzan'></i>{item2.likes_count}</p>
-                </div>
+            <Grid columns={2} gap={8} >
+              {item1.topics && item1.topics.map((item2: any) => {
+                return <Grid.Item key={item2.id} onClick={()=>{navigate(`/chapter?title=${item2.title}&id=${item2.id}`) }}>
+                    <div className={styles.verti}> 
+                      <Image  src={item2.vertical_image_url} width={185} height={200} fit='fill'></Image>      
+                      <p className={styles.item2tages}>{item2.tags}</p>
+                      <p className={styles.usernickname}>{item2.user.nickname}</p>
+                      <p className={styles.dianzan}><i className='iconfont icon-dianzan'></i>{item2.likes_count}</p>
+                    </div>
+                </Grid.Item>
               })
               }
-            </div>
+            </Grid>
           </div>
         })}
-
       </div>
-
     </div>
   );
 }

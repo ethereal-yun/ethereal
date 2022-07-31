@@ -17,12 +17,14 @@
     .rank{
       flex: 1;
       margin-top: 10px;
-      text-align: center;  
+      text-align: center;
+      font-size: 16px;
     }
     .sort{  
       flex: 1;  
       margin-top: 10px;
       text-align: center;
+      font-size: 16px;
     }
   }
   .YC{
@@ -62,6 +64,10 @@
             left:5px;
             color:black;
             font-weight: 800;
+            max-width: 132px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
           .likes_count{
             position: absolute;
@@ -76,13 +82,11 @@
           font-weight: 500;
         }
       }
-
     }
     
   }
   .discovery{
     margin-top: 10px;
-    height: 2540px;
     .modules{
       .h2{
         font-weight: 800;
@@ -90,40 +94,41 @@
         margin: 10px 0;
       }
       .verti{
-        float: left;
-        padding: 2px 2px;
-        .tagimg{
-          position: relative;
-          img{
-            width: 180px;
-            height: 170px;
-          }
-          .tagsitem2{
-            position: absolute;
-            bottom:2px;
-            left:5px;
-            font-weight: 800;
-            font-size: medium;
-            color: blue;
-          }
-        }
-        p{
-          margin: 0px;
-          padding: 0px;
-        }
-        .usernickname{
-          max-width: 180px;
+        position: relative;
+        .item2tages{
+          position: absolute;
+          bottom: 3px;
+          left: 0px;
+          font-weight: 800;
+          font-size: medium;
+          color: rgb(9, 9, 9);
+          max-width: 132px;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
-          margin: 0;
         }
-
+        .usernickname{
+          max-width: 132px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          font-weight: 600;
+          font-size: medium;
+          float: left;
+        }
+        .dianzan{
+          max-width: 60px;
+          float: right;
+        }
       }
-
     }
   } 
 }
+p{
+  margin: 0px;
+}
+
+
 
 
 

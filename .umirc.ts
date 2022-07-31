@@ -28,9 +28,11 @@ export default defineConfig({
     { path: "/rank", component: "rank", title: "排行榜" },
     { path: "/sort", component: "sort", title: "分类" },
     { path: "/chapter", component: "chapter", title: "章节" },
-    { path: "/content", component: "content", title: "章节内容" },
+    { path: "/content/:id", component: "content", title: "章节内容" },
     { path: "/me", component: "me", title: "我的" },
     { path: "/book", component: "book", title: "书架" },
+    { path: "/search", component: "search", title: "搜索" },
+    { path: "/world", component: "world", title: "世界" },
   ],
   npmClient: 'pnpm',
 });

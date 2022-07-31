@@ -18,6 +18,8 @@ export function onRouteChange({ clientRoutes, location }: { clientRoutes: any, l
 // 导出的一个运行时request对象
 export const request: RequestConfig = {
     timeout: 100000,
+
+
     errorConfig: {
         errorHandler(error: any) {
             notification.error({

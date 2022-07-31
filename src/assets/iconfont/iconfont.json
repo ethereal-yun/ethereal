@@ -6,88 +6,18 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "24642289",
+      "name": "地球",
+      "font_class": "diqiu",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
       "icon_id": "6337455",
       "name": "点赞",
       "font_class": "dianzan",
       "unicode": "ec7f",
       "unicode_decimal": 60543
-    },
-    {
-      "icon_id": "2076220",
-      "name": " 下拉箭头小",
-      "font_class": "xialajiantouxiao",
-      "unicode": "e87e",
-      "unicode_decimal": 59518
-    },
-    {
-      "icon_id": "76992",
-      "name": "搜索",
-      "font_class": "sousuo",
-      "unicode": "e601",
-      "unicode_decimal": 58881
-    },
-    {
-      "icon_id": "3267408",
-      "name": "收藏",
-      "font_class": "shoucang",
-      "unicode": "e617",
-      "unicode_decimal": 58903
-    },
-    {
-      "icon_id": "3826856",
-      "name": "自我评价",
-      "font_class": "ziwopingjia",
-      "unicode": "e626",
-      "unicode_decimal": 58918
-    },
-    {
-      "icon_id": "999",
-      "name": "品牌",
-      "font_class": "pinpai",
-      "unicode": "e600",
-      "unicode_decimal": 58880
-    },
-    {
-      "icon_id": "750881",
-      "name": "单品",
-      "font_class": "danpin",
-      "unicode": "e7ab",
-      "unicode_decimal": 59307
-    },
-    {
-      "icon_id": "1526304",
-      "name": "单品",
-      "font_class": "danpin1",
-      "unicode": "e65b",
-      "unicode_decimal": 58971
-    },
-    {
-      "icon_id": "2076282",
-      "name": " 订单",
-      "font_class": "dingdan",
-      "unicode": "e897",
-      "unicode_decimal": 59543
-    },
-    {
-      "icon_id": "12594570",
-      "name": "产品管理",
-      "font_class": "chanpinguanli",
-      "unicode": "e722",
-      "unicode_decimal": 59170
-    },
-    {
-      "icon_id": "14996407",
-      "name": "首页",
-      "font_class": "shouye",
-      "unicode": "e614",
-      "unicode_decimal": 58900
-    },
-    {
-      "icon_id": "18941503",
-      "name": "首页",
-      "font_class": "shouye1",
-      "unicode": "e60d",
-      "unicode_decimal": 58893
     }
   ]
 }
