@@ -67,7 +67,6 @@ export default function Page() {
       <br></br>
       <div>
         <ul className={styles.detailsortlist}>
-        
             {detdata && detdata.topics.map((item) => {
               return <li key={item.id} className={styles.innersort} onClick={(e)=>todetaill(item.id,item.title)}>
                 <Image src={item.vertical_image_url} width={100} height={120} fit='fill' />
