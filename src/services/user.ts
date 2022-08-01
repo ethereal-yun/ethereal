@@ -1,29 +1,19 @@
 import { request } from '@umijs/max';
 
-// export function queryUserList({ current = 1, pageSize = 5 }) {
-//     return request(`/api/users?current=${current}&pageSize=${pageSize}`)
-// }
+//首页home数据  
+export function queryHome() {
+    return request("/api/v2/pweb/home")
+}
 
-// export function queryUserById(id: number) {
-//     return request(`/api/users/${id}`);
-// }
+//首页home编辑推荐
+export function queryHomeRectopics(){
+    return request("/api/v2/pweb/ugc/rec_topics")
+}
+//首页home最新上架
+export function queryHomeTopics(){
+    return request("/api/v2/pweb/ugc/topics")
+}
 
-// export function deleteUserById(id: number, { current = 1, pageSize = 5 }) {
-//     // return request(`/api/users/delete/${id}?current=${current}&pageSize=${pageSize}`);
-//     return request(`/api/users/delete/${id}`, {
-//         params: { current: current, pageSize: pageSize },
-//     })
-// }
-
-// export function createUser(user: any) {
-//Y     return request(`/api/users/create`, {
-//         method: "POST",
-//         data: user,
-//         headers: {
-//             'Content-Type': 'application/json;charset=utf-8'
-//         }
-//     });
-// }
 //获取排行
 export function getcol() {
     return request(`/api/v2/pweb/rank_type_list`)
@@ -38,8 +28,12 @@ export function getexactrank(id:number) {
 export function getsort() {
     return request(`/api/v1/search/by_tag?since=0&count=24&f=3&tag=0&sort=1&query_category={"update_status":1}`)
 }
-
 //根据类别来获取数据
-export function searchsort(tag:number,sort:number,update_status:number) {
-    return request(`/api/v1/search/by_tag?since=0&count=24&f=3&tag=${tag}&sort=${sort}&query_category={"update_status":${update_status}}`)
+export function searchsort(count:number,tag:number,sort:number,update_status:number) {
+    return request(`/api/v1/search/by_tag?since=0&count=${count}&f=3&tag=${tag}&sort=${sort}&query_category={"update_status":${update_status}}`)
+}
+
+//获取漫画每一章内容
+export function queryContent(id:string) {
+    return request(`/api/v2/pweb/comic/${id}`)
 }

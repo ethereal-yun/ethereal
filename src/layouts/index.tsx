@@ -1,11 +1,11 @@
 import { FC, useState } from "react";
-import { Outlet, useLocation, useNavigate, useSearchParams } from "@umijs/max";
+import {Outlet,useLocation,useNavigate,useSearchParams} from "@umijs/max";
 import styles from '@/layouts/index.less';
-import { NavBar, TabBar } from 'antd-mobile'
-import { AppOutline, UnorderedListOutline, ContentOutline, UserOutline } from 'antd-mobile-icons'
+import { NavBar, SearchBar, TabBar} from 'antd-mobile';
+import {AppOutline,UnorderedListOutline,ContentOutline,UserOutline, SearchOutline} from 'antd-mobile-icons';
+import '@/assets/iconfont/iconfont.css';
 
 const Layout: FC = () => {
-
     const navigate = useNavigate();
     const [SearchParams] = useSearchParams();
     const [activeKey, setActiveKey] = useState('home')
@@ -15,10 +15,10 @@ const Layout: FC = () => {
         if (includesArr.includes(location.pathname)) {
             let newtitle = '首页'
             switch (location.pathname) {
-                case '/': newtitle = '首页'; break;
-                case '/renew': newtitle = '更新'; break;
-                case '/book': newtitle = '书架'; break;
-                case '/me': newtitle = '我的'; break;
+                case '/': return <NavBar backArrow={false} className={styles.Navbar}><SearchBar placeholder='自动获取光标' onSearch={val=>navigate('/search/?title=搜索')}/><img onClick={()=>{navigate("/world?title=世界")}} className={styles.world} src={require("@/assets/images/world.png")} /></NavBar>;
+                case '/renew': return <NavBar backArrow={false} className={styles.Navbar}>热播更新 <SearchOutline onClick={()=>{navigate("/search?title=搜索")}} className={styles.search}/></NavBar>;
+                case '/book': return <NavBar backArrow={false} className={styles.Navbar}>书架</NavBar>;
+                case '/me': return <NavBar backArrow={false} className={styles.Navbar}>我的</NavBar>;
             }
             return <NavBar backArrow={false} className={styles.Navbar}>{newtitle}</NavBar>;
         } else {
@@ -45,15 +45,14 @@ const Layout: FC = () => {
             key: 'me',
             title: '我的',
             icon: <UserOutline />,
-        },
+        }, 
     ]
-    const back = () => {
+    const back = () =>{
         navigate(-1);
     }
     const tabChange = (key: string) => {
         navigate(`/${key}`)
         setActiveKey(key)
-        console.log(key);
     }
 
     return <div>
