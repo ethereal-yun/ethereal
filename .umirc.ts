@@ -20,7 +20,8 @@ export default defineConfig({
     }
   },
   request: {
-    dataField: 'data'
+    dataField: 'data',
+
   },
   routes: [
     { path: "/", component: "home", title: "首页" },
