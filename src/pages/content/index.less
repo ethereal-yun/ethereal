@@ -31,9 +31,36 @@
             float: right;
         }
     }
+    .showLeft{
+        position: absolute;
+        animation:changeleft 5s linear ;
+        height: 100px;
+        width: 50px;
+    }
+
 }
 p{
     margin: 0;
     font-size: medium;
 }
+.adm-floating-bubble-button{
+    animation:left 10s linear ;
+}
+@keyframes changeleft{   
+    0%{
+        --initial-position-left:10px;
+
+    }
+
+    50%{
+        --initial-position-left:20px;
+
+    }
+
+    100%{
+        --initial-position-left:30px;
+  
+    }
+}
+
 
