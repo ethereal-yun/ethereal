@@ -10,7 +10,7 @@ export default function Page() {
   const [emitrun, setemitrun] = useState(9)
   const navigate = useNavigate()
   //获取所有榜单title和id
-  const { data, error,run, loading } = useRequest(() => {
+  const { data, error, run, loading } = useRequest(() => {
     return getcol();
   }, {
     cacheKey: 'data',
@@ -26,24 +26,24 @@ export default function Page() {
     cacheKey: 'exadata',
   });
   //获取点击哪个榜单，榜单的id，触发获取对应榜单数据
-  const changerank = (e:any) => {
+  const changerank = (e: any) => {
     setemitrun(e)
 
   }
   useEffect(() => {
     exarun()
   }, [emitrun])
- useEffect(()=>{
-  run();
-  exarun()
- },[])
+  useEffect(() => {
+    run();
+    exarun()
+  }, [])
   //跳转到详情页
-  const todetail = (e:any,title:any) => {
+  const todetail = (e: any, title: any) => {
     navigate(`/chapter?id=${e}&title=${title}`)
   }
-
-  return (
-    <div>
+  const checkDataExist = () => {
+    if (data && exadata) {
+      return  <div>
       <div className={styles.bigimg}><Image src={exadata && exadata.rank_info.topics[0].cover_image_url} width={375} height={200} fit='fill' /></div>
       <div className={styles.smallimg}> <Image src={require('@/assets/images/rank.png')} fit='fill' />
         <h1 className={styles.texrcolor}>  {exadata && exadata.rank_info.title}</h1>
@@ -51,21 +51,22 @@ export default function Page() {
       </div>
       <div className={styles.centerbox}>
         <SideBar className={styles.sidebar} onChange={(e) => changerank(e)}>
-          {data && data.rank_types.map((item:any) => (
+          {!loading && data && data.rank_types.map((item: any) => (
             <SideBar.Item key={item.rank_id} title={item.title} />
           ))}
         </SideBar>
         <ul>
           {exadata && exadata.rank_info.topics.map(item => {
             return <li className={styles.everycartoon} key={item.id} >
-              <div onClick={(e) => todetail(item.id,item.title)}>
-                <Card title={item.title} >
+              <div>
+                <Card title={item.title}  onHeaderClick={(e) => todetail(item.id, item.title)}>
                   <div className={styles.textandimg}>
-                    <Image src={item.cover_image_url} width={100} height={100} fit='fill' />
+                    <Image src={item.cover_image_url} width={100} height={100} fit='fill'  onClick={(e) => todetail(item.id, item.title)}/>
                     <div>
-                      <span>作者：{item.user.nickname}</span><hr />
-                      <span>标签：{item.tags}</span></div></div>
-                      <span>简介：<Ellipsis direction='end' rows={2} content={item.description} /></span>
+                      <span  onClick={(e) => todetail(item.id, item.title)}>作者：{item.user.nickname}</span><hr />
+                      <span  onClick={(e) => todetail(item.id, item.title)}>标签：{item.tags}</span></div></div>
+                  <span>简介：<Ellipsis direction='end' rows={2} content={item.description} expandText='展开'
+                    collapseText='收起' /></span>
                 </Card>
 
               </div>
@@ -75,5 +76,17 @@ export default function Page() {
         </ul>
       </div>
     </div >
+    }
+    else {
+      return <><div className={styles.fulfillingbouncingcirclespinner}>
+      <div className={styles.circle}></div>
+      <div className={styles.orbit}></div>
+  
+    </div>
+        <h2 className={styles.loadingtips}>加载中，请稍后</h2></>
+    }
+  }
+  return (
+    <div>{checkDataExist()}</div>
   );
 }
