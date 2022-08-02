@@ -15,6 +15,7 @@ specifiers:
   prettier-plugin-organize-imports: ^2
   prettier-plugin-packagejson: ^2
   react-transition-group: ^4.4.5
+  react-virtualized: ^9.22.3
   typescript: ^4.1.2
 
 dependencies:
@@ -25,6 +26,7 @@ dependencies:
   antd-mobile: 5.20.0
   antd-mobile-icons: 0.3.0
   react-transition-group: 4.4.5
+  react-virtualized: 9.22.3
 
 devDependencies:
   '@types/react': 18.0.15
@@ -3257,6 +3259,11 @@ packages:
     engines: {node: '>=6'}
     dependencies:
       is-regexp: 2.1.0
+    dev: false
+
+  /clsx/1.2.1:
+    resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
+    engines: {node: '>=6'}
     dev: false
 
   /collection-visit/1.0.0:
@@ -8192,6 +8199,20 @@ packages:
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
+    dev: false
+
+  /react-virtualized/9.22.3:
+    resolution: {integrity: sha512-MKovKMxWTcwPSxE1kK1HcheQTWfuCxAuBoSTf2gwyMM21NdX/PXUhnoP8Uc5dRKd+nKm8v41R36OellhdCpkrw==}
+    peerDependencies:
+      react: ^15.3.0 || ^16.0.0-alpha
+      react-dom: ^15.3.0 || ^16.0.0-alpha
+    dependencies:
+      '@babel/runtime': 7.18.9
+      clsx: 1.2.1
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react-lifecycles-compat: 3.0.4
     dev: false
 
   /react/18.1.0:
