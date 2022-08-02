@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { getChapter } from '@/services/user';
 import { Tabs, Toast, Button, Popup, Space, TextArea, Form, Dialog, Input, Card } from 'antd-mobile'
-import { StarOutline } from 'antd-mobile-icons'
+import { StarOutline ,StarFill} from 'antd-mobile-icons'
 import { useSearchParams, useNavigate, useRequest } from '@umijs/max';
 import ImageUploader, { ImageUploadItem } from 'antd-mobile/es/components/image-uploader';
 import { mockUpload } from './utils';
@@ -11,10 +11,33 @@ import { connect } from '@umijs/max';
 const Page=({dispatch,list})=> {
   const [SearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { data } = useRequest(() => getChapter(SearchParams.get('id')!), { cacheKey: 'chapter' });
+  let id=Number(SearchParams.get("id"));
+  const { data } = useRequest(() => getChapter(SearchParams.get("id")!), { cacheKey: 'chapter' });
   const [plist, setList] = useState([]) as any;
   const [visible1, setVisible1] = useState(false);
   const [fileList, setFileList] = useState<ImageUploadItem[]>([{ url: '' },]);
+  const [isList,setIsList]=useState(true)
+  //初始化
+  useEffect(()=>{
+    setIsList(isStore())
+  },[])
+   const storeHandle=(data:any)=>{  
+    if(isStore()){
+      //已收藏
+     setIsList(false)  
+      dispatch({type: 'collect/unCollect',payload:data.id});  
+    }else{
+      //未收藏  
+      setIsList(true)  
+      dispatch({type: 'collect/isCollect',payload:data});
+    }    
+   }
+    //dva中是否存在,是否收藏，返回true，则收藏,返回false，则未收藏
+   function isStore(){  
+    return list.some(item=>{   
+      return item.id==id
+    })   
+   } 
   const onFinish = (values: any) => {
     console.log(values);
     setList([...plist, values]);
@@ -56,10 +79,12 @@ const Page=({dispatch,list})=> {
           <p>类型：{data && data.topic_info.tags.map((item: any, index: number) => {
             return <span key={index}>{item}</span>
           })}</p>
-          <div className={styles.collect}>
+           {
+            data && <div className={styles.collect}  onClick={()=>storeHandle(data.topic_info)} >
             收藏
-            <StarOutline className={styles.col} />
+           { !isList?<StarOutline/>:<StarFill color='var(--adm-color-danger)'/>}
           </div>
+          }
         </div>
       </div>
       <div className={styles.intro}>
@@ -112,4 +137,5 @@ const Page=({dispatch,list})=> {
 export default connect(({ collect }) => ({
   list: collect.list,
 }))(Page);
+
 
