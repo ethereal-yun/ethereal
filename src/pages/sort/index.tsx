@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { useRequest, useNavigate } from '@umijs/max';
 import { getsort, searchsort } from '@/services/user'
-import { Image, InfiniteScroll,FloatingBubble } from 'antd-mobile'
-import { LocationOutline  } from 'antd-mobile-icons'
+import { Image, InfiniteScroll, FloatingBubble } from 'antd-mobile'
+import { LocationOutline } from 'antd-mobile-icons'
 
 export default function Page() {
   const navigate = useNavigate()
@@ -13,14 +13,13 @@ export default function Page() {
   const [count, setcount] = useState(24)
   const [active, setactive] = useState([0, 1, 0])
   const [hasMore, setHasMore] = useState(true)
-  const [isshow,setshow] = useState(false)
+  const [isshow, setshow] = useState(false)
+  
   async function loadMore() {
-   
-    if(count-detdata.topics.length<=6){
-      setcount(count+6)
-      await  run()
 
-      console.log(count,detdata.topics.length);
+    if (count - detdata.topics.length <= 6) {
+      setcount(count + 6)
+      await run()
     }
     else setHasMore(false)
   }
@@ -35,7 +34,6 @@ export default function Page() {
     cacheKey: 'data2',
   });
   const gete1 = (e: any) => {
-
     setfirstatt(e.target.childNodes[1].innerHTML)
   }
   const gete2 = (e: any) => {
@@ -55,19 +53,20 @@ export default function Page() {
     exarun()
     window.addEventListener('scroll', bindHandleScroll)//对scroll进行事件监听，或得页面滚动距离
   }, [])
-  const bindHandleScroll = (e)=>{
-      let top=  e.srcElement.documentElement.scrollTop
-      top>1000? setshow(true):setshow(false)
+  const bindHandleScroll = (e) => {
+    let top = e.srcElement.documentElement.scrollTop
+    top > 1000 ? setshow(true) : setshow(false)
   }
 
   const todetaill = (e: any, title) => {
     navigate(`/chapter?id=${e}&title=${title}`)
   }
-  const clickbubble = ()=>{
-    window.scrollTo(0,0)
+  const clickbubble = () => {
+    window.scrollTo(0, 0)
   }
+  console.log(cdata,"xxxx");
   const checkDataExist = () => {
-    if (cdata && detdata) {
+    if (cdata&&cdata.update_status && detdata) {
       return <div className={styles.bigbox}>
         <div className={styles.sortlist}>
           <ul className={styles.s1} onClick={(e) => gete1(e)}>
@@ -100,17 +99,17 @@ export default function Page() {
           </ul>
         </div>
         <FloatingBubble
-        style={{
-          '--initial-position-bottom': '60px',
-          '--initial-position-right': '24px',
-          '--edge-distance': '24px',
-          display:isshow?'block':'none'
-        }}
-        onClick={clickbubble}
-      >
-        <LocationOutline fontSize={32} />
-      </FloatingBubble>
-      <InfiniteScroll loadMore={loadMore} hasMore={hasMore} threshold={100}/>
+          style={{
+            '--initial-position-bottom': '60px',
+            '--initial-position-right': '24px',
+            '--edge-distance': '24px',
+            display: isshow ? 'block' : 'none'
+          }}
+          onClick={clickbubble}
+        >
+          <LocationOutline fontSize={32} />
+        </FloatingBubble>
+        <InfiniteScroll loadMore={loadMore} hasMore={hasMore} threshold={100} />
       </div>
     }
     else {

@@ -41,3 +41,13 @@ export function queryContent(id:string) {
 export function queryWorld() {
     return request('/api/v1/graph/pc/feeds/getRecommendFeed?uid=0&webTokenId=1615007958330_FFwnyURnzD0rgO2&since=0&limit=10')
 }
+
+// 获取漫画章节
+export function getChapter(id: string) {
+    return request(`/api/v2/pweb/topic/${id}`);
+}
+
+// 获取更新内容
+export function getRenew({pos}) {
+    return request(`/api/v2/pweb/daily/topics?pos=${pos}`)
+}
