@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styles from './index.less';
 import { queryContent } from "@/services/user";
 import { useRequest, history, useParams, useNavigate } from '@umijs/max';
-import { Image, Toast, Card, FloatingBubble } from 'antd-mobile';
+import { Image, Toast, Card} from 'antd-mobile';
 import { LeftOutline, MessageOutline, RightOutline } from 'antd-mobile-icons';
 import '@/assets/iconfont/iconfont.css';
+
 export default function Page() {
   const params = useParams();
   const navigate = useNavigate();
@@ -28,14 +29,14 @@ export default function Page() {
       setFlag(false);
     }
   }
+  console.log(params.id, data);
   useEffect(() => {
     run();
   }, [id])
+  console.log(data);
   return (
     <div className={styles.cont} onClick={() => setFlag(!flag)}>
-      <div className={flag?"showLeft":"hideLeft"}>
-        
-      </div>
+
       {
         data && <div>
           {
@@ -45,14 +46,16 @@ export default function Page() {
           }
           {
             flag ? <div>
-              <FloatingBubble  style={{ '--initial-position-bottom': '50%', '--initial-position-left': '5px', '--size': '48px', '--background': "none" }} onClick={(e: any) => Go(e, data.previous_comic_info.id)}>
-                <div className={flag?"showLeft":"hideLeft"}>
-                  <LeftOutline fontSize={48} color='var(--adm-color-primary)' />
-                </div>              
-              </FloatingBubble>
-              <FloatingBubble style={{ '--initial-position-bottom': '50%', '--initial-position-right': '5px', '--size': '48px', '--background': "none" }} onClick={(e: any) => Go(e, data.next_comic_info.id)}>
-                <RightOutline className={flag?"showRight":"hideRight"} fontSize={48} color='var(--adm-color-primary)' />
-              </FloatingBubble>
+              {
+                data.previous_comic_info && <div onClick={(e: any) => Go(e, data.previous_comic_info.id)}>
+                  <LeftOutline className={styles.showLeft} fontSize={48} color='var(--adm-color-primary)' />
+                </div>
+              }
+              {
+                data.next_comic_info && <div onClick={(e: any) => Go(e, data.next_comic_info.id)}>
+                  <RightOutline className={styles.showRight} fontSize={48} color='var(--adm-color-primary)' />
+                </div>
+              }
             </div> : ""
           }
           <Card title='同类推荐'>

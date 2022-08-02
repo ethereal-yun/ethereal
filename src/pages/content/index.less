@@ -32,10 +32,18 @@
         }
     }
     .showLeft{
-        position: absolute;
-        animation:changeleft 5s linear ;
-        height: 100px;
-        width: 50px;
+        position  : fixed !important;
+        top       : 50%;
+        left:0px;
+        animation:changeleft 2s linear ;
+        z-index: 999;
+    }
+    .showRight{
+        position  : fixed !important;
+        top       : 50%;
+        right: 0px;
+        animation:changeright 2s linear ;
+        z-index: 999;
     }
 
 }
@@ -43,23 +51,22 @@ p{
     margin: 0;
     font-size: medium;
 }
-.adm-floating-bubble-button{
-    animation:left 10s linear ;
-}
+
 @keyframes changeleft{   
     0%{
-        --initial-position-left:10px;
-
+        left:40px
     }
-
-    50%{
-        --initial-position-left:20px;
-
-    }
-
     100%{
-        --initial-position-left:30px;
-  
+        left:0px 
+    }
+}
+
+@keyframes changeright{
+    0%{
+        right:40px;
+    }
+    100%{
+        right:0px; 
     }
 }
 

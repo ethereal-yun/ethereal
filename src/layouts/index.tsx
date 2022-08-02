@@ -18,7 +18,7 @@ const Layout: FC = () => {
         case '/':
           return (
             <NavBar backArrow={false} className={styles.Navbar}>
-              <SearchBar placeholder="自动获取光标" onSearch={val => navigate('/search/?title=搜索')} />
+              <SearchBar placeholder="自动获取光标" onSearch={val => navigate(`/search/?title=搜索&val=${val}`)} />
               <img
                 onClick={() => {
                   navigate('/world?title=世界')

@@ -1,28 +1,23 @@
 import { useRequest } from '@umijs/max'
-import React, { useState } from 'react'
-import { useEffect } from 'react'
-import { Button, SearchBar, Space, Toast, Popup, List, Card, Ellipsis } from 'antd-mobile' //Ellipsis文本省略 Popup弹出层
+import React, { useState,useEffect } from 'react'
+import { Button, SearchBar, Space,Popup, List, Card, Ellipsis } from 'antd-mobile' //Ellipsis文本省略 Popup弹出层
 import './index.less'
-import { Divider } from 'antd'
-import { useNavigate } from '@umijs/max'
-
+import { useNavigate,useSearchParams } from '@umijs/max';
 export default function Page() {
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const [SearchParams] = useSearchParams();
   const [visible2, setVisible2] = useState(false)
-  const [tag, setTag] = useState<string>('斗罗大陆')
+  const [tag, setTag] = useState<string>(SearchParams.get('val')?SearchParams.get('val')!:'斗罗大陆')
   const [his, setHis] = useState<any>([]) //搜索历史
   const [sort, setSort] = useState<number>(0)
-
   const { data, run, loading } = useRequest('/api/v2/pweb/home') //获取分类标签
   const { data: data1 } = useRequest(`/api/v1/search/topic?q=${tag}&f=5&size=10`, { refreshDeps: [tag] }) //依赖刷新    监听搜索框变化
   const { data: data2 } = useRequest(`/api/v1/search/by_tag?since=0&count=24&f=3&tag=${sort}&sort=1&query_category={"update_status":0} `, { refreshDeps: [sort] }) //监听tag变化
-  // console.log(data);
-  //console.log(data1);
-  // console.log(data2)
-
+  useEffect(()=>{
+    setHis([...his,SearchParams.get('val')]);
+  },[SearchParams.get('val')])
   while (data) {
-    const rendersort = data2.topics.map((item, index) => {
+    const rendersort = data2.topics.map((item:any, index:number) => {
       //创建分类页面
       return (
         <div className="detail" key={index}  onClick={() => navigate(`/chapter?id=${item.id}&title=${item.title}`)}>
@@ -66,7 +61,7 @@ export default function Page() {
           mask={false}
         >
           <List header="搜索历史">
-            {his.map((item, index) => {
+            {his.map((item:any, index:number) => {
               return (
                 <p
                   key={index}
@@ -103,7 +98,7 @@ export default function Page() {
 
         <Card title="搜索结果">
           <div className="result">
-            {data1.hit.map((item, index) => {
+            {data1.hit.map((item:any, index:number) => {
               if (sort == 0) {
                 return (
                   <div className="detail" key={index} onClick={() => navigate(`/chapter?id=${item.id}&title=${item.title}`)}>

@@ -25,7 +25,6 @@ export default function Page() {
     flag ? (recdata && setList([...recdata.topics])) : (topcdata && setList([...topcdata.list]));
     run();
   }, [flag, loading,id])
-  
   return (
     <div className={styles.home}>
       {/*轮播图 */}
