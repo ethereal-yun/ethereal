@@ -45,7 +45,6 @@ export default function Page() {
             setVisible2(false)
           }}
           onSearch={(value: string) => {
-            //console.log(value)
             setTag(value)
             setHis([value, ...his])
             setSort(0) //每次点击搜索将sort等于0,让分类停止渲染

@@ -8,13 +8,36 @@ import ImageUploader, { ImageUploadItem } from 'antd-mobile/es/components/image-
 import { mockUpload } from './utils';
 import { connect } from '@umijs/max';
 
-const Page=({dispatch,list})=> {
+const Page = ({ dispatch, list }) => {
   const [SearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { data } = useRequest(() => getChapter(SearchParams.get('id')!), { cacheKey: 'chapter' });
+  let id = Number(SearchParams.get("id"));
+  const { data } = useRequest(() => getChapter(SearchParams.get("id")!), { cacheKey: 'chapter' });
   const [plist, setList] = useState([]) as any;
   const [visible1, setVisible1] = useState(false);
   const [fileList, setFileList] = useState<ImageUploadItem[]>([{ url: '' },]);
+  const [isList, setIsList] = useState(true)
+  //初始化
+  useEffect(() => {
+    setIsList(isStore())
+  }, [])
+  const storeHandle = (data: any) => {
+    if (isStore()) {
+      //已收藏
+      setIsList(false)
+      dispatch({ type: 'collect/unCollect', payload: data.id });
+    } else {
+      //未收藏  
+      setIsList(true)
+      dispatch({ type: 'collect/isCollect', payload: data });
+    }
+  }
+  //dva中是否存在,是否收藏，返回true，则收藏,返回false，则未收藏
+  function isStore() {
+    return list.some(item => {
+      return item.id == id
+    })
+  }
   const onFinish = (values: any) => {
     console.log(values);
     setList([...plist, values]);
@@ -27,13 +50,13 @@ const Page=({dispatch,list})=> {
   const GoContent = (locked_code: string, need_vip: boolean, id: string, title: string) => {
     if (locked_code == '200' && !need_vip) {
       navigate(`/content/${id}?title=${title}`)
-    } else if(need_vip){
+    } else if (need_vip) {
       Toast.show({
         content: '当前是vip章节,升级会员后方可解锁观看',
         maskClickable: false,
         duration: 2000,
       })
-    }else{
+    } else {
       Toast.show({
         content: '当前是付费章节,付费后方可解锁观看',
         maskClickable: false,
@@ -56,10 +79,12 @@ const Page=({dispatch,list})=> {
           <p>类型：{data && data.topic_info.tags.map((item: any, index: number) => {
             return <span key={index}>{item}</span>
           })}</p>
-          <div className={styles.collect}>
-            收藏
-            <StarOutline className={styles.col} />
-          </div>
+          {
+            data && <div className={styles.collect} style={{ color: !isList ? "" : "red" }} onClick={() => storeHandle(data.topic_info)} >
+              收藏
+              <StarOutline className={styles.col} style={{ color: !isList ? "" : "red" }} />
+            </div>
+          }
         </div>
       </div>
       <div className={styles.intro}>
@@ -77,7 +102,7 @@ const Page=({dispatch,list})=> {
                 </div>
                 <div>
                   <h3 className={styles.listitle}>{item.title}</h3>
-                  <p className={styles.data}><span className={styles.span}>{item.need_vip ? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费章节':""}</span>{item.created_at}</p>
+                  <p className={styles.data}><span className={styles.span}>{item.need_vip ? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费章节' : ""}</span>{item.created_at}</p>
                 </div>
               </div>
             })
@@ -112,4 +137,3 @@ const Page=({dispatch,list})=> {
 export default connect(({ collect }) => ({
   list: collect.list,
 }))(Page);
-
