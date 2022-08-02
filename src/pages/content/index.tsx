@@ -141,13 +141,13 @@ export default function Page() {
       }
       {
         pdata && pdata.topic_info.comics && <Space direction='vertical'>
-          <Popup visible={flag} onMaskClick={() => { setFlag(false) }} position='left' bodyStyle={{ minWidth: '40vw' }}>
+          <Popup visible={flag} onMaskClick={() => { setFlag(false) }} position='left' bodyStyle={{ minWidth: '53.4vw' }}>
             <AutoSizer disableHeight>
               {({ width }: { width: number }) => (
                 <VirtualizedList
                   rowCount={pdata.topic_info.comics.length}
                   rowRenderer={rowRenderer}
-                  width={width}
+                  width={200}
                   height={660}
                   rowHeight={50}
                   overscanRowCount={10}
