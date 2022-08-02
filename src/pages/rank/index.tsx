@@ -41,8 +41,9 @@ export default function Page() {
   const todetail = (e: any, title: any) => {
     navigate(`/chapter?id=${e}&title=${title}`)
   }
+  console.log(data,);
   const checkDataExist = () => {
-    if (data && exadata) {
+    if (data&&!data.rank_type && exadata) {
       return  <div>
       <div className={styles.bigimg}><Image src={exadata && exadata.rank_info.topics[0].cover_image_url} width={375} height={200} fit='fill' /></div>
       <div className={styles.smallimg}> <Image src={require('@/assets/images/rank.png')} fit='fill' />

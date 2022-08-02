@@ -38,6 +38,12 @@ export function queryContent(id:string) {
     return request(`/api/v2/pweb/comic/${id}`)
 }
 
+
+export function queryList({pos=6}){
+    return request(`/apiv2/pweb/daily/topics?pos=${pos}`)
+}
+
+
 export function queryWorld() {
     return request('/api/v1/graph/pc/feeds/getRecommendFeed?uid=0&webTokenId=1615007958330_FFwnyURnzD0rgO2&since=0&limit=10')
 }

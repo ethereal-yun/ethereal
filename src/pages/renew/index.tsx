@@ -53,12 +53,12 @@ export default function Page() {
           </Tabs.Tab>
         })}
       </Tabs>
+
     }
     else {
       return <><div className={styles1.fulfillingbouncingcirclespinner}>
         <div className={styles1.circle}></div>
         <div className={styles1.orbit}></div>
-
       </div>
         <h2 className={styles1.loadingtips}>加载中，请稍后</h2></>
     }

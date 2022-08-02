@@ -6,23 +6,23 @@ import { StarOutline } from 'antd-mobile-icons'
 import { useSearchParams, useNavigate, useRequest } from '@umijs/max';
 import ImageUploader, { ImageUploadItem } from 'antd-mobile/es/components/image-uploader';
 import { mockUpload } from './utils';
+import { connect } from '@umijs/max';
 
-export default function Page() {
+const Page=({dispatch,list})=> {
   const [SearchParams] = useSearchParams();
   const navigate = useNavigate();
   const { data } = useRequest(() => getChapter(SearchParams.get('id')!), { cacheKey: 'chapter' });
-  const [list, setList] = useState([]) as any;
+  const [plist, setList] = useState([]) as any;
   const [visible1, setVisible1] = useState(false);
   const [fileList, setFileList] = useState<ImageUploadItem[]>([{ url: '' },]);
   const onFinish = (values: any) => {
     console.log(values);
-    setList([...list, values]);
+    setList([...plist, values]);
     Dialog.alert({
       content: "评论成功",
       closeOnMaskClick: true,
     })
     setVisible1(false);
-    console.log(list);
   }
   const GoContent = (locked_code: string, need_vip: boolean, id: string, title: string) => {
     if (locked_code == '200' && !need_vip) {
@@ -109,4 +109,7 @@ export default function Page() {
     </div>
   );
 }
+export default connect(({ collect }) => ({
+  list: collect.list,
+}))(Page);
 
