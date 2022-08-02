@@ -37,3 +37,13 @@ export function searchsort(tag:number,sort:number,update_status:number) {
 export function queryContent(id:string) {
     return request(`/api/v2/pweb/comic/${id}`)
 }
+
+// 获取漫画章节
+export function getChapter(id: number) {
+    return request(`/api/v2/pweb/topic/${id}`);
+}
+
+// 获取更新内容
+export function getRenew({pos}) {
+    return request(`/api/v2/pweb/daily/topics?pos=${pos}`)
+}
