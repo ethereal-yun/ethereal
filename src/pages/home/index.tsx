@@ -14,6 +14,7 @@ export default function Page() {
   const [flag, setFlag] = useState(true) as any;
   const [id,setId] = useState("1");
   const { data: cdata, loading: cloading,run} = useRequest(() => queryContent(id), { refreshDeps:[id]})
+  console.log(cdata);
   const gochapter=(id:string)=>{
     setId(id);
     if(cdata.code==200){
@@ -28,7 +29,7 @@ export default function Page() {
   return (
     <div className={styles.home}>
       {/*轮播图 */}
-      {data && <Swiper loop={true} autoplay={true}>{data.banners.map((item: any, index: number) => (
+      {data && data.banners && <Swiper loop={true} autoplay={true}>{data.banners.map((item: any, index: number) => (
         <Swiper.Item key={index}>
           <div className={styles.content} onClick={()=>gochapter(item.target_id)}  >
             <img className={styles.img} src={item.image_url} />

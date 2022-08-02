@@ -8,9 +8,10 @@ import { connect } from '@umijs/max';
 import { useSearchParams } from '@umijs/max';
 
 const Page=({dispatch,list})=> {
-  const { data } = useRequest(() => getChapter(id));
+
   const [searchParams, setSearchParams] = useSearchParams();
-  let id=Number(searchParams.get("id"))
+  let id=Number(searchParams.get("id"));
+  const { data } = useRequest(() => getChapter(searchParams.get("id")!));
   const [isList,setIsList]=useState(true)
 
   //初始化

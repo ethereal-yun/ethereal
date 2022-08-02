@@ -6,7 +6,7 @@ specifiers:
   '@types/react': ^18.0.0
   '@types/react-dom': ^18.0.0
   '@umijs/max': ^4.0.9
-  antd: ^4.20.7
+  antd: ^4.22.2
   antd-mobile: ^5.20.0
   antd-mobile-icons: ^0.3.0
   husky: ^8.0.1
