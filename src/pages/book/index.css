@@ -1,26 +1,23 @@
-
-.adm-grid-item{
+.adm-grid-item {
   padding: 3px 3px;
 }
-.img{
+.img {
   width: 110px;
   height: 140px;
-    img{
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-    }
-    
 }
-.title{
+.img img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.title {
   font-size: 12px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-.icon{
+.icon {
   position: relative;
   left: 110;
-  top:0 ;
+  top: 0 ;
 }

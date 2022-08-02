@@ -37,3 +37,11 @@ export function searchsort(tag:number,sort:number,update_status:number) {
 export function queryContent(id:string) {
     return request(`/api/v2/pweb/comic/${id}`)
 }
+
+export function queryList({pos=6}){
+    return request(`/apiv2/pweb/daily/topics?pos=${pos}`)
+}
+
+export function getChapter(id: number) {
+    return request(`/api/v2/pweb/topic/${id}`);
+}

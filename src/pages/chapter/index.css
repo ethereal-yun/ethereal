@@ -1,0 +1,70 @@
+.maximg {
+  height: 100%;
+  width: 100%;
+}
+.detail {
+  display: flex;
+}
+.detail .pic .minimg {
+  width: 130px;
+  height: 160px;
+  position: relative;
+  top: -20px;
+  left: 10px;
+}
+.detail .detright {
+  margin-left: 6px;
+}
+.detail .detright p {
+  margin: 0px;
+  margin-left: 20px;
+  color: #333;
+  font-size: 12px;
+}
+.detail .detright .title {
+  text-align: center;
+  margin-bottom: 0px;
+  margin-top: 25px;
+  margin-left: 20px;
+  width: 100%;
+  background: #79b7f2;
+}
+.detail .detright .descript {
+  margin-top: 6px;
+}
+.intro .introtit {
+  text-align: center;
+  margin-top: 10px;
+  height: 40px;
+  line-height: 40px;
+  background: #79b7f2;
+}
+.listitem {
+  display: flex;
+}
+.listitem .listimg {
+  width: 200px;
+  height: 100px;
+  margin-bottom: 15px;
+}
+.listitem .listitle {
+  margin-left: 10px;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: center;
+}
+.listitem .data {
+  margin-left: 10px;
+  color: #666;
+  text-align: center;
+  margin-top: 25px;
+}
+.collect {
+  margin-left: 16px;
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-top: 5px;
+}
+.collect .col {
+  font-size: 20px;
+}
