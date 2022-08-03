@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { getChapter } from '@/services/user';
 import { Tabs, Toast, Button, Popup, Space, TextArea, Form, Dialog, Input, Card } from 'antd-mobile'
-import { StarOutline } from 'antd-mobile-icons'
+import { StarOutline ,StarFill} from 'antd-mobile-icons'
 import { useSearchParams, useNavigate, useRequest } from '@umijs/max';
 import ImageUploader, { ImageUploadItem } from 'antd-mobile/es/components/image-uploader';
 import { mockUpload } from './utils';
 import { connect } from '@umijs/max';
 
-const Page=({dispatch,list})=> {
+const Page = ({ dispatch, list }) => {
   const [SearchParams] = useSearchParams();
   const navigate = useNavigate();
   let id=Number(SearchParams.get("id"));
@@ -16,35 +16,29 @@ const Page=({dispatch,list})=> {
   const [plist, setList] = useState([]) as any;
   const [visible1, setVisible1] = useState(false);
   const [fileList, setFileList] = useState<ImageUploadItem[]>([{ url: '' },]);
-  const [isList,setIsList]=useState(false)
-  const mast=localStorage.getItem("userinfo")as any
-  
+
+  const [isList, setIsList] = useState(true)
   //初始化
-  useEffect(()=>{
+  useEffect(() => {
     setIsList(isStore())
-  },[])
-   const storeHandle=(data:any)=>{  
-    if(JSON.parse(mast).token){
-      if(isStore()){
-        //已收藏
-       setIsList(false)  
-        dispatch({type: 'collect/unCollect',payload:data.id});  
-      }else{
-        //未收藏  
-        setIsList(true)  
-        dispatch({type: 'collect/isCollect',payload:data});
-      }  
-    }else{
-      navigate("/login")
+  }, [])
+  const storeHandle = (data: any) => {
+    if (isStore()) {
+      //已收藏
+      setIsList(false)
+      dispatch({ type: 'collect/unCollect', payload: data.id });
+    } else {
+      //未收藏  
+      setIsList(true)
+      dispatch({ type: 'collect/isCollect', payload: data });
     }
-      
-   }
-    //dva中是否存在,是否收藏，返回true，则收藏,返回false，则未收藏
-   function isStore(){  
-    return list.some(item=>{   
-      return item.id==id
-    })   
-   } 
+  }
+  //dva中是否存在,是否收藏，返回true，则收藏,返回false，则未收藏
+  function isStore() {
+    return list.some((item:any) => {
+      return item.id == id
+    })
+  }
   const onFinish = (values: any) => {
     setList([...plist, values]);
     Dialog.alert({
@@ -53,16 +47,16 @@ const Page=({dispatch,list})=> {
     })
     setVisible1(false);
   }
-  const GoContent = (locked_code: string, need_vip: boolean, id: string, title: string) => {
+  const GoContent = (locked_code: string, need_vip: boolean, id: string, title: string,val:string) => {
     if (locked_code == '200' && !need_vip) {
-      navigate(`/content/${id}?title=${title}`)
-    } else if(need_vip){
+      navigate(`/content/${id}?title=${title}&val=${val}`)
+    } else if (need_vip) {
       Toast.show({
         content: '当前是vip章节,升级会员后方可解锁观看',
         maskClickable: false,
         duration: 2000,
       })
-    }else{
+    } else {
       Toast.show({
         content: '当前是付费章节,付费后方可解锁观看',
         maskClickable: false,
@@ -86,9 +80,11 @@ const Page=({dispatch,list})=> {
             return <span key={index}>{item}</span>
           })}</p>
            {
-            data && <div className={styles.collect} style={{ color: !isList ? "" : "red" }} onClick={()=>storeHandle(data.topic_info)} >
+
+            data && <div className={styles.collect}  onClick={()=>storeHandle(data.topic_info)} >
             收藏
-          <StarOutline className={styles.col} style={{ color: !isList ? "" : "red" }} />
+           { !isList?<StarOutline/>:<StarFill color='var(--adm-color-danger)'/>}
+
           </div>
           }
         </div>
@@ -102,13 +98,13 @@ const Page=({dispatch,list})=> {
         <Tabs.Tab title='章节列表' key='lists'>
           {
             data && data.topic_info.comics.map((item: any, index: number) => {
-              return <div key={index} className={styles.listitem} onClick={() => GoContent(item.locked_code, item.need_vip, item.id, item.title)}>
+              return <div key={index} className={styles.listitem} onClick={() => GoContent(item.locked_code, item.need_vip, item.id, item.title,SearchParams.get("id")!)}>
                 <div>
                   <img className={styles.listimg} src={item.cover_image_url} />
                 </div>
                 <div>
                   <h3 className={styles.listitle}>{item.title}</h3>
-                  <p className={styles.data}><span className={styles.span}>{item.need_vip ? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费章节':""}</span>{item.created_at}</p>
+                  <p className={styles.data}><span className={styles.span}>{item.label_info? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费章节' : ""}</span>{item.created_at}</p>
                 </div>
               </div>
             })
@@ -143,4 +139,6 @@ const Page=({dispatch,list})=> {
 export default connect(({ collect }) => ({
   list: collect.list,
 }))(Page);
+
+
 

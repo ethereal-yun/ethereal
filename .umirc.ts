@@ -22,7 +22,9 @@ export default defineConfig({
       target: 'https://www.kuaikanmanhua.com/',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
-    }
+
+    },
+
   },
   request: {
     dataField: 'data',

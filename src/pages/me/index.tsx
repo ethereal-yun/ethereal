@@ -9,6 +9,7 @@ import './index.less'
 
 const Page = ({ user,dispatch }) => {
   const { data } = useRequest('/api/v1/graph/pc/feeds/getRecommendFeed?uid=0&webTokenId=1615007958330_FFwnyURnzD0rgO2&since=0&limit=20 ')
+
   const navigate = useNavigate()
   const [info, setInfo] = useState(true)
   
