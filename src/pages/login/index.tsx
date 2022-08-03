@@ -51,7 +51,7 @@ const Demo= ({ dispatch }) => {
           label='密码'
           rules={[{ required: true, message: '密码不能为空' }]}
         >
-          <Input placeholder='请输入密码' />
+          <Input placeholder='请输入密码'  type='password' />
         </Form.Item>
       </Form>
 
