@@ -59,6 +59,10 @@
   text-align: center;
   margin-top: 25px;
 }
+.listitem .data .span {
+  color: orangered;
+  font-size: 15px;
+}
 .collect {
   margin-left: 16px;
   font-size: 16px;
@@ -67,4 +71,20 @@
 }
 .collect .col {
   font-size: 20px;
+}
+.sort {
+  margin-top: 15px;
+  font-size: 14px;
+  margin-left: 60px;
+}
+.image .imagess {
+  width: 100px;
+  height: 100px;
+  padding: 2px;
+}
+.evaluate {
+  margin-top: 5px;
+  height: 40px;
+  line-height: 20px;
+  text-align: center;
 }
