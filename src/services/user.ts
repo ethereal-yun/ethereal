@@ -57,3 +57,15 @@ export function getChapter(id: string) {
 export function getRenew({pos}) {
     return request(`/api/v2/pweb/daily/topics?pos=${pos}`)
 }
+
+//登录
+
+export function createlogin(params: any) {
+    return request("/api2/login", {
+        method: "POST",
+        params,
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    });
+}

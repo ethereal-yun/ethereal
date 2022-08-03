@@ -13,11 +13,16 @@ export default defineConfig({
   dva: {},
   initialState: {},
   proxy: {
+    '/api2': {
+      target: 'http://localhost:8000/',
+      changeOrigin: true,
+      pathRewrite: { '^/api2': '' },
+    },
     '/api': {
       target: 'https://www.kuaikanmanhua.com/',
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
-    },
+    }
   },
   request: {
     dataField: 'data',
@@ -30,9 +35,10 @@ export default defineConfig({
     { path: "/chapter", component: "chapter", title: "章节" },
     { path: "/content/:id", component: "content", title: "章节内容" },
     { path: "/me", component: "me", title: "我的" },
-    { path: "/book", component: "book", title: "书架" },
+    { path: "/book", component: "book", title: "漫画岛" },
     { path: "/search", component: "search", title: "搜索" },
     { path: "/world", component: "world", title: "世界" },
+    {path: "/login", component: "login", title: "登录"}
   ],
   npmClient: 'pnpm',
 });

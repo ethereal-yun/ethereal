@@ -11,12 +11,41 @@ import { connect } from '@umijs/max';
 const Page=({dispatch,list})=> {
   const [SearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const { data } = useRequest(() => getChapter(SearchParams.get('id')!), { cacheKey: 'chapter' });
+  let id=Number(SearchParams.get("id"));
+  const { data } = useRequest(() => getChapter(SearchParams.get("id")!), { cacheKey: 'chapter' });
   const [plist, setList] = useState([]) as any;
   const [visible1, setVisible1] = useState(false);
   const [fileList, setFileList] = useState<ImageUploadItem[]>([{ url: '' },]);
+  const [isList,setIsList]=useState(false)
+  const mast=localStorage.getItem("userinfo")as any
+  
+  //初始化
+  useEffect(()=>{
+    setIsList(isStore())
+  },[])
+   const storeHandle=(data:any)=>{  
+    if(JSON.parse(mast).token){
+      if(isStore()){
+        //已收藏
+       setIsList(false)  
+        dispatch({type: 'collect/unCollect',payload:data.id});  
+      }else{
+        //未收藏  
+        setIsList(true)  
+        dispatch({type: 'collect/isCollect',payload:data});
+      }  
+    }else{
+      navigate("/login")
+    }
+      
+   }
+    //dva中是否存在,是否收藏，返回true，则收藏,返回false，则未收藏
+   function isStore(){  
+    return list.some(item=>{   
+      return item.id==id
+    })   
+   } 
   const onFinish = (values: any) => {
-    console.log(values);
     setList([...plist, values]);
     Dialog.alert({
       content: "评论成功",
@@ -56,10 +85,12 @@ const Page=({dispatch,list})=> {
           <p>类型：{data && data.topic_info.tags.map((item: any, index: number) => {
             return <span key={index}>{item}</span>
           })}</p>
-          <div className={styles.collect}>
+           {
+            data && <div className={styles.collect} style={{ color: !isList ? "" : "red" }} onClick={()=>storeHandle(data.topic_info)} >
             收藏
-            <StarOutline className={styles.col} />
+          <StarOutline className={styles.col} style={{ color: !isList ? "" : "red" }} />
           </div>
+          }
         </div>
       </div>
       <div className={styles.intro}>

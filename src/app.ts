@@ -44,6 +44,8 @@ export const request: RequestConfig = {
     //响应拦截
     responseInterceptors: [
         (response) => {
+            console.log(response,"xxxxxxxxxxxxxxxx");
+            
             // console.log("响应拦截器",response)
             return response;
         }
