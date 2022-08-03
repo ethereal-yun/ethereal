@@ -4,7 +4,7 @@ import { useRequest, useNavigate } from '@umijs/max';
 import { getsort, searchsort } from '@/services/user'
 import { Image, InfiniteScroll, FloatingBubble } from 'antd-mobile'
 import { LocationOutline } from 'antd-mobile-icons'
-
+import styles1 from '@/pages/rank/index.less'
 export default function Page() {
   const navigate = useNavigate()
   const [first, setfirstatt] = useState(0)
@@ -113,12 +113,12 @@ export default function Page() {
       </div>
     }
     else {
-      return <><div className={styles.fulfillingbouncingcirclespinner}>
-        <div className={styles.circle}></div>
-        <div className={styles.orbit}></div>
+      return <><div className={styles1.fulfillingbouncingcirclespinner}>
+        <div className={styles1.circle}></div>
+        <div className={styles1.orbit}></div>
 
       </div>
-        <h2 className={styles.loadingtips}>加载中，请稍后</h2></>
+        <h2 className={styles1.loadingtips}>加载中，请稍后</h2></>
     }
   }
 

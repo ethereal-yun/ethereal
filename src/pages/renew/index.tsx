@@ -3,7 +3,7 @@ import styles from './index.less';
 import { getRenew } from '@/services/user';
 import { useRequest,useNavigate } from '@umijs/max';
 import { Tabs, Space, Tag } from 'antd-mobile'
-import styles1 from '@/pages/sort/index.less';
+import styles1 from '@/pages/rank/index.less';
 export default function Page() {
   let [day, setDay] = useState(6);
   const navigate = useNavigate();
