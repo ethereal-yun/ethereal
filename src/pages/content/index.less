@@ -1,5 +1,4 @@
 .cont{
-    .btn{
         .button1{
             width: 186px;
             border: 0px;
@@ -13,7 +12,6 @@
             border: 0px;
             margin: 0 0 0 1px;
         }
-    }
     .retopics{
         height: 350px;
         .title{
@@ -31,9 +29,56 @@
             float: right;
         }
     }
+    .showLeft{
+        position  : fixed !important;
+        top       : 50%;
+        left:0px;
+        animation:changeleft 2s linear ;
+        z-index: 999;
+    }
+    .showRight{
+        position  : fixed !important;
+        top       : 50%;
+        right: 0px;
+        animation:changeright 2s linear ;
+        z-index: 999;
+    }
+
+
 }
 p{
     margin: 0;
     font-size: medium;
 }
+
+@keyframes changeleft{   
+    0%{
+        left:40px
+    }
+    100%{
+        left:0px 
+    }
+}
+
+@keyframes changeright{
+    0%{
+        right:40px;
+    }
+    100%{
+        right:0px; 
+    }
+}
+.span{
+    color: orangered;
+}
+.span2{
+    color: powderblue;
+}
+.Circle{
+    position  : fixed !important;
+    width: 100%;
+    bottom :3px;
+    right:0px;
+}
+
 

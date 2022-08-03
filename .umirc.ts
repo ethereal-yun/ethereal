@@ -6,7 +6,7 @@ export default defineConfig({
   base: '/',
   publicPath: '/',
   history: {
-    type: 'browser'
+    type: 'browser',
   },
   access: {},
   model: {},
@@ -14,13 +14,18 @@ export default defineConfig({
   initialState: {},
   proxy: {
     '/api': {
-      'target': 'https://www.kuaikanmanhua.com/',
-      'changeOrigin': true,
-      'pathRewrite': { '^/api': '' },
-    }
+      target: 'https://www.kuaikanmanhua.com/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
+    '/api2': {
+      target: 'http://localhost:8000/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
   },
   request: {
-    dataField: 'data'
+    dataField: 'data',
   },
   routes: [
     { path: "/", component: "home", title: "首页" },

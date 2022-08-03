@@ -16,19 +16,19 @@ export default function Page() {
   const { data: cdata, loading: cloading,run} = useRequest(() => queryContent(id), { refreshDeps:[id]})
   const gochapter=(id:string)=>{
     setId(id);
+    run();
     if(cdata.code==200){
-      navigate(`/content/${id}?title=${cdata.comic_info.title}`)
+      console.log(cdata.topic_info.id);
+      navigate(`/content/${id}?title=${cdata.comic_info.title}&val=${cdata.topic_info.id}`);
     }
   }
   useEffect(() => {
     flag ? (recdata && setList([...recdata.topics])) : (topcdata && setList([...topcdata.list]));
-    run();
-  }, [flag, loading,id])
-  
+  }, [flag, loading])
   return (
     <div className={styles.home}>
       {/*轮播图 */}
-      {data && <Swiper loop={true} autoplay={true}>{data.banners.map((item: any, index: number) => (
+      {data && data.banners && <Swiper loop={true} autoplay={true}>{data.banners.map((item: any, index: number) => (
         <Swiper.Item key={index}>
           <div className={styles.content} onClick={()=>gochapter(item.target_id)}  >
             <img className={styles.img} src={item.image_url} />
