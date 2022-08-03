@@ -14,17 +14,17 @@ export default function Page() {
   const [flag, setFlag] = useState(true) as any;
   const [id,setId] = useState("1");
   const { data: cdata, loading: cloading,run} = useRequest(() => queryContent(id), { refreshDeps:[id]})
-  console.log(cdata);
   const gochapter=(id:string)=>{
     setId(id);
+    run();
     if(cdata.code==200){
-      navigate(`/content/${id}?title=${cdata.comic_info.title}`)
+      console.log(cdata.topic_info.id);
+      navigate(`/content/${id}?title=${cdata.comic_info.title}&val=${cdata.topic_info.id}`);
     }
   }
   useEffect(() => {
     flag ? (recdata && setList([...recdata.topics])) : (topcdata && setList([...topcdata.list]));
-    run();
-  }, [flag, loading,id])
+  }, [flag, loading])
   return (
     <div className={styles.home}>
       {/*轮播图 */}

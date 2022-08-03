@@ -1,0 +1,25 @@
+.title {
+  background: #eef279;
+}
+.days {
+  display: inline-block;
+}
+.rnewtitle {
+  color: #333;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.author {
+  color: #999;
+}
+.img {
+  margin-bottom: 15px;
+}
+.img .renewimg {
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+}

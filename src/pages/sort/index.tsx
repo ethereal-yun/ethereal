@@ -13,10 +13,8 @@ export default function Page() {
   const [count, setcount] = useState(24)
   const [active, setactive] = useState([0, 1, 0])
   const [hasMore, setHasMore] = useState(true)
-  const [isshow, setshow] = useState(false)
-  
+  const [isshow, setshow] = useState(false)  
   async function loadMore() {
-
     if (count - detdata.topics.length <= 6) {
       setcount(count + 6)
       await run()
