@@ -102,7 +102,7 @@ const Page = ({ dispatch, list }) => {
                 </div>
                 <div>
                   <h3 className={styles.listitle}>{item.title}</h3>
-                  <p className={styles.data}><span className={styles.span}>{(item.locked_code == 10103) ? '付费章节' : ""}</span>{item.created_at}</p>
+                  <p className={styles.data}><span className={styles.span}>{item.label_info? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费章节' : ""}</span>{item.created_at}</p>
                 </div>
               </div>
             })

@@ -7,7 +7,7 @@ import './index.less'
 export default function Page() {
   const { data } = useRequest('/api/v1/graph/pc/feeds/getRecommendFeed?uid=0&webTokenId=1615007958330_FFwnyURnzD0rgO2&since=0&limit=20 ')
 
-  //console.log(data)
+  console.log(data)
 
   const navigate = useNavigate()
   const shujia = () => {

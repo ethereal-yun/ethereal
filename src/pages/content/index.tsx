@@ -2,9 +2,9 @@ import React, { useState, useEffect, CSSProperties } from 'react';
 import styles from './index.less';
 import { queryContent, getChapter } from "@/services/user";
 import { useRequest, history, useParams, useNavigate, useSearchParams } from '@umijs/max';
-import { Image, Toast, Card, Space, Button, Popup, InfiniteScroll, List } from 'antd-mobile';
+import { Image, Toast, Card, Space, Button, Popup, List, ProgressCircle, ProgressBar } from 'antd-mobile';
 import { Divider } from 'antd';
-import { LeftOutline, MessageOutline, RightOutline } from 'antd-mobile-icons';
+import {MessageOutline} from 'antd-mobile-icons';
 import { List as VirtualizedList, AutoSizer } from 'react-virtualized';
 import '@/assets/iconfont/iconfont.css';
 
@@ -16,6 +16,7 @@ export default function Page() {
   const [flag, setFlag] = useState(false);
   const [btnPre, setbtnPre] = useState(false);
   const [btnNext, setbtnNext] = useState(false);
+  const [pre,setPre] = useState(SearchParams.get("index")?SearchParams.get("index"):0) as any;
   const { data, loading: dloading } = useRequest(() => queryContent(params.id!), { cacheKey: 'content' });
   const { data: pdata, loading: ploading } = useRequest(() => getChapter(SearchParams.get("val")!), { cacheKey: 'chapter' });
   const { data: cdata, loading: cloading, run } = useRequest(() => queryContent(id), { refreshDeps: [id] })
@@ -61,13 +62,10 @@ export default function Page() {
       setbtnNext(false);
     }
   }
-  const GO = (id: string, title: string, need_vip: boolean, locked_code: string,) => {
-    // console.log(id, title,need_vip,locked_code);
-    // navigate(`/content/${id}?title=${title}&val=${pdata.topic_info.id}`);
-    // setFlag(false);
-    // window.location.reload();
+  const GO = (id: string, title: string, need_vip: boolean, locked_code: string,index:number) => {
+    let idx =pdata.topic_info.comics.length-index;
     if (locked_code == '200' && !need_vip) {
-      navigate(`/content/${id}?title=${title}&val=${pdata.topic_info.id}`);
+      navigate(`/content/${id}?title=${title}&val=${pdata.topic_info.id}&index=${idx}`);
       setFlag(false);
       window.location.reload();
     } else if (need_vip) {
@@ -87,7 +85,6 @@ export default function Page() {
   useEffect(() => {
     run();
   }, [id])
-
   function rowRenderer({
     index,
     style,
@@ -101,10 +98,10 @@ export default function Page() {
       <List.Item
         key={index}
         style={style}
-        onClick={() => GO(item.id, item.title, item.need_vip, item.locked_code)}
+        onClick={() => GO(item.id, item.title, item.need_vip, item.locked_code,index)}
         arrow={false}
       >
-        <span className={styles.span}>{(item.locked_code == 10103) ? '付费':""}</span>{item.title}
+        <span className={styles.span}>{item.label_info? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费':""}</span><span className={pre == (pdata.topic_info.comics.length-index) ? styles.span2:''}>{item.title}</span> 
       </List.Item>
     )
   }
@@ -151,10 +148,11 @@ export default function Page() {
                   height={660}
                   rowHeight={50}
                   overscanRowCount={10}
-                  style={{ '--active-background-color':'powderblue'}}
+                  style={{  '--active-background-color':'powderblue'}}
                 />
               )}
             </AutoSizer>
+            <ProgressBar  className={styles.Circle} percent={Math.floor((pre/pdata.topic_info.comics.length)*100)} text />
           </Popup>
         </Space>
       }

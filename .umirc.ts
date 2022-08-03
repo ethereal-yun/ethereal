@@ -18,6 +18,11 @@ export default defineConfig({
       changeOrigin: true,
       pathRewrite: { '^/api': '' },
     },
+    '/api2': {
+      target: 'http://localhost:8000/',
+      changeOrigin: true,
+      pathRewrite: { '^/api': '' },
+    },
   },
   request: {
     dataField: 'data',
