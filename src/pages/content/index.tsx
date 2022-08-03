@@ -101,7 +101,7 @@ export default function Page() {
         onClick={() => GO(item.id, item.title, item.need_vip, item.locked_code,index)}
         arrow={false}
       >
-        <span className={styles.span}>{item.label_info? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费':""}</span><span className={pre == (pdata.topic_info.comics.length-index) ? styles.span2:''}>{item.title}</span> 
+        <span className={styles.span}>{item.label_info? item.label_info.text : ""}{(item.locked_code == 10103) ? '付费':""}</span><span className={(item.id == params.id!)?styles.span2:''}>{item.title}</span> 
       </List.Item>
     )
   }
