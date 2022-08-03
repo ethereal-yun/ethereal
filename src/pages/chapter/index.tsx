@@ -8,12 +8,12 @@ import ImageUploader, { ImageUploadItem } from 'antd-mobile/es/components/image-
 import { mockUpload } from './utils';
 import { connect } from '@umijs/max';
 
-
-const Page = ({ dispatch, list, elist }) => {
+const Page = ({ dispatch, list, elist, hisList }) => {
   const [SearchParams] = useSearchParams();
   const navigate = useNavigate();
   let id = Number(SearchParams.get("id"));
   const { data: cdata, loading } = useRequest(() => getChapter(SearchParams.get('id')!), { cacheKey: 'chapter' });
+
   const [plist, setList] = useState([]) as any;
   const [Lists, setLists] = useState([]) as any;
   const [visible1, setVisible1] = useState(false);
@@ -24,15 +24,24 @@ const Page = ({ dispatch, list, elist }) => {
     setIsList(isStore())
   }, [])
   const storeHandle = (data: any) => {
-    if (isStore()) {
-      //已收藏
-      setIsList(false)
-      dispatch({ type: 'collect/unCollect', payload: data.id });
+    const mast = localStorage.getItem("userinfo") as any
+    // console.log(JSON.parse(mast).token);
+
+    if (mast) {
+      if (isStore()) {
+        //已收藏
+        setIsList(false)
+        dispatch({ type: 'collect/unCollect', payload: data.id });
+      } else {
+        //未收藏  
+        setIsList(true)
+        dispatch({ type: 'collect/isCollect', payload: data });
+      }
     } else {
-      //未收藏  
-      setIsList(true)
-      dispatch({ type: 'collect/isCollect', payload: data });
+      navigate("/login")
     }
+
+
   }
   //dva中是否存在,是否收藏，返回true，则收藏,返回false，则未收藏
   function isStore() {
@@ -52,7 +61,6 @@ const Page = ({ dispatch, list, elist }) => {
     })
     setVisible1(false);
   }
-
   const GoContent = (locked_code: string, need_vip: boolean, id: string, title: string, val: string) => {
     if (locked_code == '200' && !need_vip) {
       navigate(`/content/${id}?title=${title}&val=${val}`)
@@ -81,6 +89,13 @@ const Page = ({ dispatch, list, elist }) => {
       payload: Lists
     })
   }, [Lists])
+  useEffect(() => {
+    if (!cdata) return;
+    dispatch({
+      type: "history/isHistory",
+      payload: cdata.topic_info
+    })
+  }, [cdata])
   return (
     <div>
       <img className={styles.maximg} src={cdata && cdata.topic_info.cover_image_url} />
@@ -172,10 +187,12 @@ const Page = ({ dispatch, list, elist }) => {
 }
 
 
-export default connect(({ evaluate, chaplist, collect }) => ({
+
+export default connect(({ evaluate, chaplist, collect, history }) => ({
   elist: evaluate.elist,
   cLists: chaplist.cLists,
-  list: collect.list
+  list: collect.list,
+  hisList: history.hisList
 }))(Page);
 
 
