@@ -16,13 +16,13 @@ const Page = ({dispatch,list,hisList}) => {
   return (
     <div>
       <Tabs>
-        <Tabs.Tab title='收藏' key='fruits'>
+        <Tabs.Tab title='收藏' key='fruits'> 
           <Grid columns={3} gap={8}>
             {list.map(item => {
               return <Grid.Item key={item.title}  >
                 <CloseOutline style={flag?{position: "relative",left:"110",top:"0",display:"block"}:{display:"none"}} onClick={()=>removeList(item.id)}/>
                 <div {...longPressHandler}>
-                  <div className="img" onClick={()=>getClick(item.id,item.title)}><img src={item.cover_image_url}></img></div>
+                  <div className="img" onClick={()=>getClick(item.id,item.title)}><img src={item.cover_image_url}/></div>
                   <div className="title">{item.title}</div>
                 </div>
               </Grid.Item>

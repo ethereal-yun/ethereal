@@ -3,18 +3,12 @@ import { connect } from '@umijs/max'
 import { useNavigate, useRequest } from '@umijs/max'
 import { Card, Space } from 'antd-mobile'
 import { AddOutline, RightOutline } from 'antd-mobile-icons'
-import useFormItemStatus from 'antd/lib/form/hooks/useFormItemStatus'
-import { useEffect, useState } from 'react'
 import './index.less'
 
-const Page = ({ user,dispatch }) => {
+const Page = () => {
   const { data } = useRequest('/api/v1/graph/pc/feeds/getRecommendFeed?uid=0&webTokenId=1615007958330_FFwnyURnzD0rgO2&since=0&limit=20 ')
-
-  const navigate = useNavigate()
-  const [info, setInfo] = useState(true)
-  
+  const navigate = useNavigate()  
   const mast=localStorage.getItem("userinfo")as any
-
   const shujia = () => {
     navigate('/book')
   }
@@ -24,7 +18,6 @@ const Page = ({ user,dispatch }) => {
 
   return (
     <div className="title">
-
       <Card title="用户信息">
         <div className='info'>
           <div className='clicle'>
@@ -35,11 +28,8 @@ const Page = ({ user,dispatch }) => {
              <div className='login'>{JSON.parse(mast).nick} </div>
              : <div className='login' onClick={() => navigate("/login")}>请先登录</div>
           }
-
         </div>
       </Card>
-
-
       <span onClick={shijie}>更多</span>
       {data && (
         <Card title="世界">

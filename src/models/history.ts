@@ -5,7 +5,6 @@ export default {
       hisList: [],
     },
     reducers: {
-      //未收藏
       isHistory:(state: any, { payload }) =>{    
         if(state.hisList.some((item)=>item.id ==payload.id)){
             return { ...state}
@@ -14,7 +13,6 @@ export default {
         }
         return { ...state,payload};
       },
-      //已收藏，则取消收藏
       unHistory(state:any,{payload}){
         const current=state.hisList.filter(item=>{
             return item.id !==payload
@@ -22,7 +20,6 @@ export default {
         return {
             hisList:current
         }
-
       }
     },
 }
