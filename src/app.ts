@@ -43,7 +43,6 @@ export const request: RequestConfig = {
     responseInterceptors: [
         (response) => {
             
-            // console.log("响应拦截器",response)
             return response;
         }
     ]

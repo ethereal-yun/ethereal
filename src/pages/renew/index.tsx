@@ -5,33 +5,32 @@ import { useRequest,useNavigate } from '@umijs/max';
 import { Tabs, Space, Tag } from 'antd-mobile'
 import styles1 from '@/pages/rank/index.less';
 export default function Page() {
-  let [day, setDay] = useState(6);
+  let [day, setDay] = useState('');
   const navigate = useNavigate();
-  const [week, setweel] = useState(['周一', '周二', '周三', '周四', '周五', '周六', '周日',]);
+  const [week, setweel] = useState(['周日','周一', '周二', '周三', '周四', '周五', '周六' ]);
 
-  const { data, run, refresh } = useRequest(() => getRenew({
+  const { data, run} = useRequest(() => getRenew({
     pos: day
   }), {
     manual: true,
     refreshDeps: [day],
+    cacheKey: 'renew'
   });
   const callback = (key: string) => {
-    let count;
-    count = Number(key)
-    setDay(count)
+    setDay(key)
   }
-
   useEffect(() => {
-    run()
-    refresh()
-  }, [day, data])
-  useEffect(() => {
-    run()
-    refresh()
+    let now = new Date();
+    let nowday = now.getDay();
+    setDay(nowday.toString())
   }, [])
+  useEffect(() => {
+    run()
+  }, [day])
+
   const checkDataExist = () => {
     if (data) {
-      return <Tabs defaultActiveKey='1' onChange={callback} >
+      return <Tabs defaultActiveKey={day} onChange={callback} >
         {week.map((i, idx) => {
           return <Tabs.Tab title={i} key={idx} >
             {

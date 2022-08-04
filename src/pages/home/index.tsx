@@ -18,7 +18,6 @@ export default function Page() {
     setId(id);
     run();
     if(cdata.code==200){
-      console.log(cdata.topic_info.id);
       navigate(`/content/${id}?title=${cdata.comic_info.title}&val=${cdata.topic_info.id}`);
     }
   }

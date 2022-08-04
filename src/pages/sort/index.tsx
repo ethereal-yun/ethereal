@@ -35,11 +35,9 @@ export default function Page() {
     setfirstatt(e.target.childNodes[1].innerHTML)
   }
   const gete2 = (e: any) => {
-    console.log(e.target.childNodes[2].innerHTML);
     secondatt(e.target.childNodes[2].innerHTML)
   }
   const gete3 = (e: any) => {
-    console.log(e.target.childNodes[1].innerHTML);
     thirdatt(e.target.childNodes[1].innerHTML)
   }
   useEffect(() => {
@@ -62,7 +60,6 @@ export default function Page() {
   const clickbubble = () => {
     window.scrollTo(0, 0)
   }
-  console.log(cdata,"xxxx");
   const checkDataExist = () => {
     if (cdata&&cdata.update_status && detdata) {
       return <div className={styles.bigbox}>

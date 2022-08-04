@@ -41,7 +41,6 @@ export default function Page() {
   const todetail = (e: any, title: any) => {
     navigate(`/chapter?id=${e}&title=${title}`)
   }
-  console.log(data,);
   const checkDataExist = () => {
     if (data&&!data.rank_type && exadata) {
       return  <div>

@@ -25,7 +25,6 @@ const Page = ({ dispatch, list, elist, hisList }) => {
   }, [])
   const storeHandle = (data: any) => {
     const mast = localStorage.getItem("userinfo") as any
-    // console.log(JSON.parse(mast).token);
 
     if (mast) {
       if (isStore()) {
