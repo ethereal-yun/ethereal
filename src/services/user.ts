@@ -69,3 +69,13 @@ export function createlogin(params: any) {
         }
     });
 }
+
+export function register(params: any) {
+    return request("/api2/register", {
+        method: "POST",
+        params,
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8'
+        }
+    });
+}

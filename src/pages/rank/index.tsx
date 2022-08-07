@@ -28,7 +28,6 @@ export default function Page() {
   //获取点击哪个榜单，榜单的id，触发获取对应榜单数据
   const changerank = (e: any) => {
     setemitrun(e)
-
   }
   useEffect(() => {
     exarun()
