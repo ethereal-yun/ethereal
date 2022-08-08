@@ -41,7 +41,6 @@ export default function Page() {
   const todetail = (e: any, title: any) => {
     navigate(`/chapter?id=${e}&title=${title}`)
   }
-  console.log(data,);
   const checkDataExist = () => {
     if (data&&!data.rank_type && exadata) {
       return  <div>
@@ -62,7 +61,7 @@ export default function Page() {
               <div>
                 <Card title={item.title}  onHeaderClick={(e) => todetail(item.id, item.title)}>
                   <div className={styles.textandimg}>
-                    <Image src={item.cover_image_url} width={100} height={100} fit='fill'  onClick={(e) => todetail(item.id, item.title)}/>
+                    <Image src={item.cover_image_url} width={100} height={100} fit='fill'   style={{ borderRadius: 16 }} onClick={(e) => todetail(item.id, item.title)}/>
                     <div>
                       <span  onClick={(e) => todetail(item.id, item.title)}>作者：{item.user.nickname}</span><hr />
                       <span  onClick={(e) => todetail(item.id, item.title)}>标签：{item.tags}</span></div></div>

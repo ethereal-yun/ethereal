@@ -15,6 +15,10 @@ const Page = () => {
   const shijie = () => {
     navigate('/world')
   }
+  const outLogin=()=>{
+    localStorage.removeItem("userinfo");
+    navigate("/login");
+  }
 
   return (
     <div className="title">
@@ -25,7 +29,7 @@ const Page = () => {
           </div>
           {
             mast ? 
-             <div className='login'>{JSON.parse(mast).nick} </div>
+             <div className='login' onClick={()=>outLogin()}>{JSON.parse(mast).nick} </div>
              : <div className='login' onClick={() => navigate("/login")}>请先登录</div>
           }
         </div>

@@ -18,8 +18,6 @@ export function onRouteChange({ clientRoutes, location }: { clientRoutes: any, l
 // 导出的一个运行时request对象
 export const request: RequestConfig = {
     timeout: 100000,
-
-
     errorConfig: {
         errorHandler(error: any) {
             notification.error({
@@ -45,7 +43,6 @@ export const request: RequestConfig = {
     responseInterceptors: [
         (response) => {
             
-            // console.log("响应拦截器",response)
             return response;
         }
     ]

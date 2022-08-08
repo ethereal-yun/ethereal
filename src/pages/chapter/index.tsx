@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { getChapter } from '@/services/user';
-
 import { Tabs, Toast, Button, Popup, Space, TextArea, Form, Dialog, Input, ImageViewer, Card } from 'antd-mobile'
 import { StarOutline, UpOutline, DownOutline, StarFill } from 'antd-mobile-icons'
-
 import { useSearchParams, useNavigate, useRequest } from '@umijs/max';
 import ImageUploader, { ImageUploadItem } from 'antd-mobile/es/components/image-uploader';
 import { mockUpload } from './utils';
 import { connect } from '@umijs/max';
 
-
 const Page = ({ dispatch, list, elist, hisList }) => {
-  // console.log(user);
-
   const [SearchParams] = useSearchParams();
   const navigate = useNavigate();
   let id = Number(SearchParams.get("id"));
@@ -30,7 +25,6 @@ const Page = ({ dispatch, list, elist, hisList }) => {
   }, [])
   const storeHandle = (data: any) => {
     const mast = localStorage.getItem("userinfo") as any
-    // console.log(JSON.parse(mast).token);
 
     if (mast) {
       if (isStore()) {
@@ -66,9 +60,6 @@ const Page = ({ dispatch, list, elist, hisList }) => {
     })
     setVisible1(false);
   }
-
-
-
   const GoContent = (locked_code: string, need_vip: boolean, id: string, title: string, val: string) => {
     if (locked_code == '200' && !need_vip) {
       navigate(`/content/${id}?title=${title}&val=${val}`)
@@ -128,23 +119,17 @@ const Page = ({ dispatch, list, elist, hisList }) => {
       </div>
       <div className={styles.intro}>
         <h2 className={styles.introtit}>漫画简介</h2>
-
         <span>{cdata && cdata.topic_info.description}</span>
       </div>
-
       {/* 章节排序 */}
       <div className={styles.sort}>
         <Button color='success' size='mini' onClick={() => { setLists([...Lists.reverse()]) }}>切换顺序</Button>
-
       </div>
-
       <Tabs>
         <Tabs.Tab title='章节列表' key='lists'>
           {
-
             Lists && Lists.map((item: any, index: number) => {
               return <div key={index} className={styles.listitem} onClick={() => GoContent(item.locked_code, item.need_vip, item.id, item.title, SearchParams.get("id")!)}>
-
                 <div>
                   <img className={styles.listimg} src={item.cover_image_url} />
                 </div>
@@ -158,15 +143,12 @@ const Page = ({ dispatch, list, elist, hisList }) => {
           }
         </Tabs.Tab>
         <Tabs.Tab title='评价留言' key='message'>
-
           <Button block color='primary' size='large' onClick={() => { setVisible1(true) }} className={styles.evaluate}>
-
             去评价
           </Button>
           <Space direction='vertical'>
             <Popup visible={visible1} onMaskClick={() => { setVisible1(false) }} bodyStyle={{ minHeight: '40vh' }}>
               <Form onFinish={onFinish} footer={<Button block type='submit' color='primary' size='large'>提交</Button>}>
-
                 <Form.Item name='text'>
                   <TextArea defaultValue={''} showCount />
                 </Form.Item>
@@ -202,6 +184,7 @@ const Page = ({ dispatch, list, elist, hisList }) => {
     </div>
   );
 }
+
 
 
 export default connect(({ evaluate, chaplist, collect, history }) => ({
