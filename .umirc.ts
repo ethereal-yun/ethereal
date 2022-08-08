@@ -40,7 +40,8 @@ export default defineConfig({
     { path: "/book", component: "book", title: "漫画岛" },
     { path: "/search", component: "search", title: "搜索" },
     { path: "/world", component: "world", title: "世界" },
-    {path: "/login", component: "login", title: "登录"}
+    {path: "/login", component: "login", title: "登录"},
+    {path: "/register", component: "register", title: "注册"}
   ],
   npmClient: 'pnpm',
 });

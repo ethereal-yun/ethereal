@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@alex_xu/react-slider-vertify': ^1.2.0
   '@ant-design/icons': ^4.7.0
   '@ant-design/pro-components': ^1.1.3
   '@types/react': ^18.0.0
@@ -19,6 +20,7 @@ specifiers:
   typescript: ^4.1.2
 
 dependencies:
+  '@alex_xu/react-slider-vertify': 1.2.0
   '@ant-design/icons': 4.7.0
   '@ant-design/pro-components': 1.1.14
   '@umijs/max': 4.0.9_4kelmht5p6seurkgrs525r3njq
@@ -47,6 +49,14 @@ packages:
     dependencies:
       lodash.debounce: 4.0.8
       lodash.throttle: 4.1.1
+    dev: false
+
+  /@alex_xu/react-slider-vertify/1.2.0:
+    resolution: {integrity: sha512-NOrTnEfBgMHQYzDNOi/6kp6fUdeSuZ1mVImNczqzzzQDPiHHV5Sjwnx/vIhfPA79BWZQiM1qVwgUG/heMPn8zQ==}
+    peerDependencies:
+      react: ^16.9.23
+    dependencies:
+      '@babel/runtime': 7.18.9
     dev: false
 
   /@ampproject/remapping/2.2.0:

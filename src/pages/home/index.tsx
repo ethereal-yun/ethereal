@@ -48,8 +48,8 @@ export default function Page() {
         (recdata && topcdata && data) && <div className={styles.YC}>
           <div>
             <span className={styles.yctg}>原创投稿 </span>
-            <span className={styles.bjzx} style={{ color: flag ? "orangered" : "" }} onClick={() => setFlag(true)}>编辑推荐</span>
-            <span className={styles.bjzx} style={{ color: flag ? "" : "orangered" }} onClick={() => setFlag(false)}>最新上架</span>
+            <span className={styles.bjzx} style={{ color: flag ? "powderblue" : "" }} onClick={() => setFlag(true)}>编辑推荐</span>
+            <span className={styles.bjzx} style={{ color: flag ? "" : "powderblue" }} onClick={() => setFlag(false)}>最新上架</span>
           </div>
           <div className={styles.rec_topics}>
             {

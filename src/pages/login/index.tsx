@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './index.less';
-import { Form, Input, Button, ImageUploader,Dialog } from 'antd-mobile'
-import { ImageUploadItem } from 'antd-mobile/es/components/image-uploader'
+import { Form, Input, Button,Dialog } from 'antd-mobile'
 import { connect,useNavigate } from '@umijs/max';
-import { useRequest } from '@umijs/max';
 import { createlogin} from "@/services/user";
 
 const Demo= ({ dispatch }) => {
@@ -34,7 +32,7 @@ const Demo= ({ dispatch }) => {
         layout='horizontal'
         footer={
           <Button block type='submit' color='success' size='large'>
-            提交
+            登录
           </Button>
         }
       >
@@ -54,7 +52,7 @@ const Demo= ({ dispatch }) => {
           <Input placeholder='请输入密码'  type='password' />
         </Form.Item>
       </Form>
-
+       <p className='register'>无账号？<span onClick={()=>{navigate("/register")}} >前往注册</span></p>         
     </div>
   );
 }

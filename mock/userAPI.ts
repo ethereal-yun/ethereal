@@ -1,6 +1,6 @@
 const users = [
-  { name: 'Umi', nickName: 'U', gender: 'MALE' },
-  { name: 'Fish', nickName: 'B', gender: 'FEMALE' },
+  { username:'Umi', password: 'MALE' },
+  { username:'Fish', password: 'FEMALE' },
 ];
 
 export default {
@@ -12,18 +12,35 @@ export default {
     });
   },
   'POST /login': (req: any, res: any) => {
-    const {username,password}=req.query;  
-    if(username&&password){
-        res.send({
+    const {username,password}=req.query; 
+    let find = users.find(item=>(item.username == username && item.password == password)) 
+    if(find){
+        res.json({
             status:200,
             token:"enjsiuskfhdkcisn.32skjdjsdhdshfcs.dskhsdjbjdsbsbhfhs",
             nick:username
         })
     }else{
-        res.send({
+        res.json({
             status:400,
             msg:"用户名密码错误"
         })
+    }
+  },
+  'POST /register': (req: any, res: any) => {
+    const {username,password}=req.query; 
+    let find = users.find(item=>item.username == username);
+    if(find){
+        res.json({
+            status:400,
+            msg:"该用户名已存在"           
+        })
+    }else{
+      users.push(req.query);
+      res.json({
+          status:200,
+          msg:"注册成功"
+      })
     }
   },
 };
